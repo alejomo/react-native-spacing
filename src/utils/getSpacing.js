@@ -6,6 +6,51 @@ export function getPadding(spacing) {
   return getSpacing("padding", spacing);
 }
 
+export function getFlexbox(
+  dir,
+  dial = 0,
+  flex,
+  spaceBetween,
+  spaceAround,
+  stretch,
+  reverse
+) {
+  if (dial < 0 || dial > 10) {
+    throw new TypeError("`dial` parameter must be an integer between 1 and 9");
+  }
+
+  // Main-axis
+  let justifyContent;
+
+  if (spaceBetween) {
+    justifyContent = "space-between";
+  } else if (spaceAround) {
+    justifyContent = "space-around";
+  } else if (dial > 0) {
+    justifyContent = dir === "row" ? dialX(dial) : dialY(dial);
+  } else {
+    // undefined
+  }
+
+  // Cross-axis
+  let alignItems;
+
+  if (stretch) {
+    alignItems = "stretch";
+  } else if (dial > 0) {
+    alignItems = dir === "row" ? dialY(dial) : dialX(dial);
+  } else {
+    // undefined
+  }
+
+  return {
+    flex: flex || 1,
+    justifyContent,
+    alignItems,
+    flexDirection: reverse ? `${dir}-reverse` : dir
+  };
+}
+
 function getSpacing(type, spacing) {
   const style = {};
 
@@ -49,4 +94,20 @@ function getSpacing(type, spacing) {
   }
 
   return style;
+}
+
+function dialX(dial) {
+  if (dial % 3 === 0) return "flex-end";
+
+  if (dial % 3 === 2) return "center";
+
+  return "flex-start";
+}
+
+function dialY(dial) {
+  if (dial > 6) return "flex-end";
+
+  if (dial > 3) return "center";
+
+  return "flex-start";
 }
