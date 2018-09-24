@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import { getMargin, getPadding } from "./getSpacing";
-import createStyleSheet from "./createStyleSheet";
+import { getMargin, getPadding } from "./utils/getSpacing";
+import createStyleSheet from "./utils/createStyleSheet";
 
 const Row = props => {
   const {
