@@ -6,6 +6,16 @@ const shorthandStyles = (margin, padding) => Object.assign(
 function getSpacing(type, spacing) {
   const s = {}
 
+  if (typeof spacing === "string") {
+    spacing = spacing
+      .split(" ")
+      .map(val => parseInt(val, 10))
+
+    if (spacing.length === 1) {
+      spacing = spacing.pop();
+    }
+  }
+
   if (typeof spacing === "number") { s[type] = spacing }
   else if (Array.isArray(spacing)){
       switch (spacing.length) {
