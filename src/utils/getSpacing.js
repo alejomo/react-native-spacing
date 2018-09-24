@@ -7,6 +7,8 @@ export function getPadding(spacing) {
 }
 
 export function getFlexbox(dir, dial = 0, flex, space, stretch, reverse) {
+  dial = parseInt(dial, 10);
+
   if (dial < 0 || dial > 10) {
     throw new TypeError("`dial` parameter must be an integer between 1 and 9");
   }
