@@ -7,7 +7,7 @@ export function getPadding(spacing) {
 }
 
 function getSpacing(type, spacing) {
-  const s = {};
+  const style = {};
 
   if (typeof spacing === "string") {
     spacing = spacing.split(" ").map(val => parseInt(val, 10));
@@ -18,31 +18,35 @@ function getSpacing(type, spacing) {
   }
 
   if (typeof spacing === "number") {
-    s[type] = spacing;
+    style[type] = spacing;
   } else if (Array.isArray(spacing)) {
     switch (spacing.length) {
       case 1:
-        s[`${type}Vertical`] = spacing[0];
+        style[`${type}Vertical`] = spacing[0];
         break;
+
       case 2:
-        s[`${type}Vertical`] = spacing[0];
-        s[`${type}Horizontal`] = spacing[1];
+        style[`${type}Vertical`] = spacing[0];
+        style[`${type}Horizontal`] = spacing[1];
         break;
+
       case 3:
-        s[`${type}Top`] = spacing[0];
-        s[`${type}Horizontal`] = spacing[1];
-        s[`${type}Bottom`] = spacing[2];
+        style[`${type}Top`] = spacing[0];
+        style[`${type}Horizontal`] = spacing[1];
+        style[`${type}Bottom`] = spacing[2];
         break;
+
       case 4:
-        s[`${type}Top`] = spacing[0];
-        s[`${type}Right`] = spacing[1];
-        s[`${type}Bottom`] = spacing[2];
-        s[`${type}Left`] = spacing[3];
+        style[`${type}Top`] = spacing[0];
+        style[`${type}Right`] = spacing[1];
+        style[`${type}Bottom`] = spacing[2];
+        style[`${type}Left`] = spacing[3];
         break;
+
       default:
         break;
     }
   }
 
-  return s;
+  return style;
 }
