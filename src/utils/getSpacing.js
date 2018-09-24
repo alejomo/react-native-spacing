@@ -44,7 +44,7 @@ export function getFlexbox(
   }
 
   return {
-    flex: flex || 1,
+    flex,
     justifyContent,
     alignItems,
     flexDirection: reverse ? `${dir}-reverse` : dir
