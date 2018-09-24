@@ -1,4 +1,4 @@
-import { getCacheKey } from "./createStyleSheet";
+import { getCacheKey } from "./stylesheet";
 
 // @dev
 // I did not find a way to test `StyleSheet.create` output,

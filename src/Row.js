@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import { getMargin, getPadding, getFlexbox } from "./utils/getSpacing";
-import createStyleSheet from "./utils/createStyleSheet";
+import { getSpacing, getFlexbox } from "./utils/spacing";
+import createStyleSheet from "./utils/stylesheet";
 
 export default function Row({
-  margin,
-  padding,
+  m,
+  p,
   dial = 0,
   flex,
   space,
@@ -15,8 +15,8 @@ export default function Row({
 }) {
   const style = Object.assign(
     {},
-    getMargin(margin),
-    getPadding(padding),
+    getSpacing("margin", m),
+    getSpacing("padding", p),
     getFlexbox("row", dial, flex, space, stretch, reverse)
   );
 
