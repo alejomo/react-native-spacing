@@ -1,7 +1,10 @@
-const shorthandStyles = (margin, padding) => Object.assign(
-  getSpacing('margin', margin),
-  getSpacing('padding', padding)
-)
+export function getMargin(spacing) {
+  return getSpacing("margin", spacing);
+}
+
+export function getPadding(spacing) {
+  return getSpacing("padding", spacing);
+}
 
 function getSpacing(type, spacing) {
   const s = {}
@@ -44,5 +47,3 @@ function getSpacing(type, spacing) {
 
   return s
 }
-
-export default shorthandStyles

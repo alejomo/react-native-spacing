@@ -1,6 +1,6 @@
 import React from 'react';
 import { View as RNView } from 'react-native';
-import shorthandStyles from './shorthandStyles';
+import { getMargin, getPadding } from './getSpacing'
 import createStyleSheet from './createStyleSheet';
 
 const View = (props) => {
@@ -20,7 +20,7 @@ const View = (props) => {
 
     const _dial = dial > 0 && dial < 10 ? dial : 0;
 
-    const _style = shorthandStyles(margin, padding)
+    const _style = Object.assign({}, getMargin(margin), getPadding(padding));
 
     _style.flex = typeof(_flex) === "number" ? _flex : !_flex ? null : 1
 
