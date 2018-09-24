@@ -3,20 +3,18 @@ import { View as RNView } from "react-native";
 import { getMargin, getPadding } from "./utils/getSpacing";
 import createStyleSheet from "./utils/createStyleSheet";
 
-const View = props => {
-  const {
-    dial = 0,
-    flex: _flex,
-    style,
-    spaceBetween,
-    spaceAround,
-    stretch,
-    margin,
-    padding,
-    reverse,
-    ...otherProps
-  } = props;
-
+export default function View({
+  dial = 0,
+  flex: _flex,
+  style,
+  spaceBetween,
+  spaceAround,
+  stretch,
+  margin,
+  padding,
+  reverse,
+  ...otherProps
+}) {
   const _dial = dial > 0 && dial < 10 ? dial : 0;
 
   const _style = Object.assign({}, getMargin(margin), getPadding(padding));
@@ -52,6 +50,4 @@ const View = props => {
       {props.children}
     </RNView>
   );
-};
-
-export default View;
+}

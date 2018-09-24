@@ -3,20 +3,18 @@ import { View } from "react-native";
 import { getMargin, getPadding } from "./utils/getSpacing";
 import createStyleSheet from "./utils/createStyleSheet";
 
-const Row = props => {
-  const {
-    dial = 0,
-    flex: _flex,
-    spaceBetween,
-    spaceAround,
-    stretch,
-    margin,
-    padding,
-    style,
-    reverse,
-    ...otherProps
-  } = props;
-
+export default function Row({
+  dial = 0,
+  flex: _flex,
+  spaceBetween,
+  spaceAround,
+  stretch,
+  margin,
+  padding,
+  style,
+  reverse,
+  ...otherProps
+}) {
   const _dial = dial > 0 && dial < 10 ? dial : 0;
 
   const _style = Object.assign({}, getMargin(margin), getPadding(padding));
@@ -52,6 +50,4 @@ const Row = props => {
       {props.children}
     </View>
   );
-};
-
-export default Row;
+}
