@@ -6,15 +6,7 @@ export function getPadding(spacing) {
   return getSpacing("padding", spacing);
 }
 
-export function getFlexbox(
-  dir,
-  dial = 0,
-  flex,
-  spaceBetween,
-  spaceAround,
-  stretch,
-  reverse
-) {
+export function getFlexbox(dir, dial = 0, flex, space, stretch, reverse) {
   if (dial < 0 || dial > 10) {
     throw new TypeError("`dial` parameter must be an integer between 1 and 9");
   }
@@ -22,10 +14,8 @@ export function getFlexbox(
   // Main-axis
   let justifyContent;
 
-  if (spaceBetween) {
-    justifyContent = "space-between";
-  } else if (spaceAround) {
-    justifyContent = "space-around";
+  if (space) {
+    justifyContent = `space-${space}`;
   } else if (dial > 0) {
     justifyContent = dir === "row" ? dialX(dial) : dialY(dial);
   } else {

@@ -8,8 +8,7 @@ export default function View({
   padding,
   dial = 0,
   flex,
-  spaceBetween,
-  spaceAround,
+  space,
   stretch,
   reverse,
   ...props
@@ -18,15 +17,7 @@ export default function View({
     {},
     getMargin(margin),
     getPadding(padding),
-    getFlexbox(
-      "column",
-      dial,
-      flex,
-      spaceBetween,
-      spaceAround,
-      stretch,
-      reverse
-    )
+    getFlexbox("column", dial, flex, space, stretch, reverse)
   );
 
   return <RNView {...props} style={[createStyleSheet(style), props.style]} />;

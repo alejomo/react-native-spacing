@@ -8,8 +8,7 @@ export default function Row({
   padding,
   dial = 0,
   flex,
-  spaceBetween,
-  spaceAround,
+  space,
   stretch,
   reverse,
   ...props
@@ -18,7 +17,7 @@ export default function Row({
     {},
     getMargin(margin),
     getPadding(padding),
-    getFlexbox("row", dial, flex, spaceBetween, spaceAround, stretch, reverse)
+    getFlexbox("row", dial, flex, space, stretch, reverse)
   );
 
   return <View {...props} style={[createStyleSheet(style), props.style]} />;
