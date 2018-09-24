@@ -18,7 +18,10 @@ test("margin padding", () => {
 
 test("vertical", () => {
   expect(getMargin([20])).toEqual({ marginVertical: 20 });
-  expect(getMargin("20 0")).toEqual({ marginVertical: 20, marginHorizontal: 0 });
+  expect(getMargin("20 0")).toEqual({
+    marginVertical: 20,
+    marginHorizontal: 0
+  });
 });
 
 test("vertical horizontal", () => {
