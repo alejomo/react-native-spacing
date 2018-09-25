@@ -7,7 +7,7 @@ import {
   marginPropNames,
   paddingPropNames,
   spacingProps
-} from "../config";
+} from "../../config";
 
 export function filterViewProps(props) {
   return _pickBy(props, (val, name) => !spacingProps[name]);
