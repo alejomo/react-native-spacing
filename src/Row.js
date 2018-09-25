@@ -1,24 +1,13 @@
 import React from "react";
 import { View } from "react-native";
-import { getSpacing, getFlexbox } from "./utils/spacing";
+import { getSpacing, getFlexbox, filterViewProps } from "./utils/spacing";
 import createStyleSheet from "./utils/stylesheet";
 
-export default function Row({
-  m,
-  p,
-  dial = 0,
-  flex,
-  space,
-  stretch,
-  reverse,
-  ...props
-}) {
-  const style = Object.assign(
-    {},
-    getSpacing("margin", m),
-    getSpacing("padding", p),
-    getFlexbox("row", dial, flex, space, stretch, reverse)
-  );
+export default function Row(props) {
+  const style = Object.assign(getSpacing(props), getFlexbox("row", props));
+  const viewProps = filterViewProps(props);
 
-  return <View {...props} style={[createStyleSheet(style), props.style]} />;
+  return (
+    <View {...viewProps} style={[createStyleSheet(style), viewProps.style]} />
+  );
 }

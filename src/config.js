@@ -1,8 +1,27 @@
+import _zipObject from "lodash.zipobject";
+import _constant from "lodash.constant";
+
 const config = {
   sizes: []
 };
 
+const sides = ["", "t", "r", "b", "l", "v", "h"];
+
+export const marginPropNames = sides.map(side => `m${side}`);
+export const paddingPropNames = sides.map(side => `p${side}`);
+
+export const spacingPropNames = marginPropNames
+  .concat(paddingPropNames)
+  .concat(["dial", "flex", "space", "stretch", "reverse"]);
+
+export const spacingProps = _zipObject(
+  spacingPropNames,
+  spacingPropNames.map(_constant(true))
+);
+
 export function getSize(index) {
+  index = parseInt(index, 10);
+
   if (isNaN(index) || index < 0 || index > config.sizes.length - 1) {
     throw new TypeError(`Invalid size index: ${index}`);
   }
@@ -10,7 +29,7 @@ export function getSize(index) {
   return config.sizes[index];
 }
 
-export function setSizes(spacing, range = 5, strategy = double) {
+export function setSizes(spacing, range = 5, strategy = doubleStrategy) {
   if (typeof spacing === "number") {
     config.sizes = [];
 
@@ -24,7 +43,7 @@ export function setSizes(spacing, range = 5, strategy = double) {
   config.sizes.unshift(0);
 }
 
-function double(spacing, index) {
+function doubleStrategy(spacing, index) {
   return spacing * Math.pow(2, index);
 }
 
