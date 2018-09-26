@@ -13,5 +13,8 @@ export default function createStyleSheet(style) {
 }
 
 export function getCacheKey(style) {
-  return JSON.stringify(style);
+  return Object.keys(style)
+    .map(key => `${key}:${style[key]}`)
+    .sort()
+    .join(",");
 }
