@@ -1,6 +1,6 @@
 import React from "react";
 import { View as RNView } from "react-native";
-import { getSpacing, getFlexbox } from "./utils/spacing";
+import { getSpacing, getFlexbox, filterViewProps } from "./utils/spacing";
 import createStyleSheet from "./utils/stylesheet";
 
 export default function View(props) {

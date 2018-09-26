@@ -12,11 +12,13 @@
     "url": "git+https://github.com/eightyfive/react-native-spacing.git"
   },
   "keywords": [
-    "layout",
-    "react",
-    "native",
-    "flex",
-    "row"
+    "react-native",
+    "flexbox",
+    "row",
+    "bootstrap-4",
+    "spacing",
+    "util",
+    "utility"
   ],
   "author": "Benoit Sagols <benoit.sagols@gmail.com>",
   "license": "MIT",
