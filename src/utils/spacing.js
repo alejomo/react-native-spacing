@@ -117,7 +117,7 @@ export function getFlexbox(dir, { dial = 0, flex, space, stretch, reverse }) {
   }
 
   return {
-    flex,
+    flex: flex === true ? 1 : flex,
     justifyContent,
     alignItems,
     flexDirection: reverse ? `${dir}-reverse` : dir
