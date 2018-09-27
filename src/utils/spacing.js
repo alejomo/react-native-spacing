@@ -13,10 +13,18 @@ export function filterViewProps(props) {
   return _pickBy(props, (val, name) => !spacingProps[name]);
 }
 
-export function getStyle(props, dir = "column") {
+export function getRowStyle(props) {
+  return getStyle(props, "row");
+}
+
+export function getColStyle(props) {
+  return getStyle(props, "column");
+}
+
+function getStyle(props, dir) {
   return Object.assign(
     getSpacing(props),
-    getFlexbox(dir, props),
+    getFlexbox(props, dir),
     getUtils(props)
   );
 }
@@ -101,7 +109,7 @@ function getSpacingType(type, sides) {
   return style;
 }
 
-function getFlexbox(dir, { dial = 0, flex, space, stretch, reverse }) {
+function getFlexbox({ dial = 0, flex, space, stretch, reverse }, dir) {
   dial = parseInt(dial, 10);
 
   if (isNaN(dial) || dial < 0 || dial > 10) {
