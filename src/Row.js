@@ -1,10 +1,10 @@
 import React from "react";
 import { View } from "react-native";
-import { getSpacing, getFlexbox, filterViewProps } from "./utils/spacing";
+import { getStyle, filterViewProps } from "./utils/spacing";
 import createStyleSheet from "./utils/stylesheet";
 
 export default function Row(props) {
-  const style = Object.assign(getSpacing(props), getFlexbox("row", props));
+  const style = getStyle(props, "row");
   const viewProps = filterViewProps(props);
 
   return (

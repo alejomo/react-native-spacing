@@ -13,7 +13,21 @@ export function filterViewProps(props) {
   return _pickBy(props, (val, name) => !spacingProps[name]);
 }
 
-export function getSpacing(props) {
+export function getStyle(props, dir = "column") {
+  return Object.assign(
+    getSpacing(props),
+    getFlexbox(dir, props),
+    getUtils(props)
+  );
+}
+
+function getUtils({ color }) {
+  return {
+    backgroundColor: color
+  };
+}
+
+function getSpacing(props) {
   const margin = filterSides(props, marginPropNames);
   const padding = filterSides(props, paddingPropNames);
 
@@ -87,7 +101,7 @@ function getSpacingType(type, sides) {
   return style;
 }
 
-export function getFlexbox(dir, { dial = 0, flex, space, stretch, reverse }) {
+function getFlexbox(dir, { dial = 0, flex, space, stretch, reverse }) {
   dial = parseInt(dial, 10);
 
   if (isNaN(dial) || dial < 0 || dial > 10) {

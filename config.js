@@ -12,7 +12,7 @@ export const paddingPropNames = sides.map(side => `p${side}`);
 
 export const spacingPropNames = marginPropNames
   .concat(paddingPropNames)
-  .concat(["dial", "flex", "space", "stretch", "reverse"]);
+  .concat(["dial", "flex", "space", "stretch", "reverse", "color"]);
 
 export const spacingProps = _zipObject(
   spacingPropNames,
