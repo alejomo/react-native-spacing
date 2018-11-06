@@ -17,7 +17,7 @@ Due to inactivity of the original repository, I've made the following changes to
 ## Installation
 
 ```
-yarn install react-native-spacing
+$ yarn add react-native-spacing
 ```
 
 ## Basic Usage
@@ -36,6 +36,42 @@ Use react-native-spacing as little or as much as you want.
 
 ## Documentation
 
+### `Col` (`View`) & `Row` components
+
+Import the `View` component of this package as `Col` for explicitness versus `Row` component:
+
+```js
+import Col from "react-native-spacing";
+
+```
+
+Alternatively import the `Col` component as `View`:
+
+```js
+import View from "react-native-spacing";
+```
+
+Import the `Row` component as so:
+
+```js
+import { Row } from "react-native-spacing";
+```
+
+#### Example
+
+```js
+import Col, { Row } from "react-native-spacing";
+
+<Col dial={5} flex>
+  <Row style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+  <Col style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
+  <Row style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
+</Col>
+```
+
+<img src="examples/example2.jpg" width="180" />
+
+
 ### `dial` property
 
 One of the most DRY features of react-native-spacing is the `dial` property.
@@ -45,64 +81,27 @@ The idea behind this shorthand notation, is to position the child components of 
 #### Example
 
 ```js
-  import { Row } from "react-native-spacing";
+import { Row } from "react-native-spacing";
 
-  <Row dial={5} flex />
+<Row dial={5} flex />
 ```
 
 `5` is centered along both axis and, because this is a `Row`, children are horizontally aligned:
 
 <img src='examples/example1.jpg' width="180" />
 
-### `Col` (`View`) & `Row` components
-
-Import the `View` component of this package as `Col` for explicitness versus `Row` component:
-
-```js
-  import Col from "react-native-spacing";
-
-```
-
-Alternatively import the `Col` component as `View`:
-
-```js
-  import View from "react-native-spacing";
-
-```
-
-Import the `Row` component as so:
-
-```js
-  import { Row } from "react-native-spacing";
-
-```
-
-#### Example
-
-```js
-  import Col, { Row } from "react-native-spacing";
-
-  <Col dial={5} flex>
-    <Row style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-    <Col style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
-    <Row style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
-  </Col>
-```
-
-<img src="examples/example2.jpg" width="180" />
-
 ### `space` property
 
 You can also use the `space` property to override `justifyContent`:
 
 ```js
-  <Col dial={5} space="between" flex />
+<Col dial={5} space="between" flex />
 ```
 
 <img src="examples/example3.jpg" width="180" />
 
 ```js
-  <Col dial={5} space="around" flex />
+<Col dial={5} space="around" flex />
 ```
 
 <img src="examples/example4.jpg" width="180" />
@@ -112,14 +111,14 @@ You can also use the `space` property to override `justifyContent`:
 Use the `stretch` property to override `alignItems`:
 
 ```js
-  <Col dial={5} stretch flex />
+<Col dial={5} stretch flex />
 ```
 
 ### `flex` property
 
 ```js
-  <Row flex /> // flex = 1 by default
-  <Row flex={3} />
+<Row flex /> // flex = 1 by default
+<Row flex={3} />
 ```
 
 ### `reverse` property
@@ -127,8 +126,8 @@ Use the `stretch` property to override `alignItems`:
 Use reverse to change `row` to `row-reverse` or `column` to `column-reverse`:
 
 ```js
-  <Row reverse />
-  <Col reverse />
+<Row reverse />
+<Col reverse />
 ```
 
 ### Margin and Padding
@@ -138,11 +137,11 @@ Margin and padding shorthands are inspired by [Bootstrap v4 spacing utility syst
 Extra benefits are gained by using react-native-spacing instead of the core react-native `View` in that you can use shorthands for `margin` and `padding` styles that are based on the css shorthand convention:
 
 ```js
-  <Row margin={[0, 1, 2, 3]} />
+<Row margin={[0, 1, 2, 3]} />
 
 // Becomes:
 
-  <View style={{ flexDirection: "row", paddingTop: 0, paddingRight: 4, paddingBottom: 8, paddingLeft: 16 }} />
+<View style={{ flexDirection: "row", paddingTop: 0, paddingRight: 4, paddingBottom: 8, paddingLeft: 16 }} />
 ```
 
 #### Configuring spacing values
@@ -166,11 +165,11 @@ setSizes([0, 10, 20, 30, 60, 100, 500, ...]);
 Later in your app, simply specify the index of the targeted size:
 
 ```js
-  <Row p={6} />
+<Row p={6} />
 
 // Becomes:
 
-  <View style={{ flexDirection: "row", padding: 500 }} />
+<View style={{ flexDirection: "row", padding: 500 }} />
 ```
 
 #### `setSizes` API
@@ -200,14 +199,10 @@ setSizes(10, 10, (amount, index, range) => amount * index);
 setSizes(2, 3, (amount, index, range) => amount * index + 27);
 // -> [27, 29, 31]
 
-// Equivalent strategies...
+// ...
 setSizes(5, 4, (amount, index, range) => amount * index * range);
-// -> [0, 20, 40, 60]
-
 setSizes(20, 4, (amount, index, range) => amount * index);
 // -> [0, 20, 40, 60]
-
-// ...
 ```
 
 
@@ -217,13 +212,15 @@ Shorthand   | Style Result
 ------------ | -------------
 `m={3}` | `{margin: 16}`
 `m={[3]}` | `{margin: 16}`
-`m={[3, 0]}` | `{marginVertical: 16, marginHorizontal: 0 }`
+`m={[3, 0]}` | `{marginVertical: 16, marginHorizontal: 0}`
 `m={[3, 0, 5]}` | `{marginTop: 16, marginHorizontal: 0, marginBottom: 64}`
 `m={[3, 0, 5, 1]}` | `{marginTop: 16, marginRight: 0, marginBottom: 64, marginLeft: 4}`
 `mt={3}` | `{marginTop: 16}`
 `ml={3}` | `{marginLeft: 16}`
 `mb={3}` | `{marginBottom: 16}`
 `mr={3}` | `{marginRight: 16}`
+`mv={3}` | `{marginVertical: 16}`
+`mh={3}` | `{marginHorizontal: 16}`
 
 
 #### `padding` shorthands
@@ -232,13 +229,13 @@ Shorthand   | Style Result
 ------------ | -------------
 `p={3}` | `{padding: 16}`
 `p={[3]}` | `{padding: 16}`
-`p={[3, 0]}` | `{paddingVertical: 16, paddingHorizontal: 0 }`
+`p={[3, 0]}` | `{paddingVertical: 16, paddingHorizontal: 0}`
 `p={[3, 0, 5]}` | `{paddingTop: 16, paddingHorizontal: 0, paddingBottom: 64}`
 `p={[3, 0, 5, 1]}` | `{paddingTop: 16, paddingRight: 0, paddingBottom: 64, paddingLeft: 4}`
 `pt={3}` | `{paddingTop: 16}`
 `pl={3}` | `{paddingLeft: 16}`
 `pb={3}` | `{paddingBottom: 16}`
 `pr={3}` | `{paddingRight: 16}`
+`pv={3}` | `{paddingVertical: 16}`
+`ph={3}` | `{paddingHorizontal: 16}`
 
-
-Contributions and issues are very much welcome.
