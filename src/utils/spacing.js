@@ -50,9 +50,9 @@ function getSpacingType(type, sides) {
   let shorthand = sides[""];
 
   if (shorthand) {
-    if (typeof shorthand === "string") {
-      shorthand = shorthand.split(" ");
-    } else if (typeof shorthand === "number") {
+    delete sides[""];
+
+    if (typeof shorthand === "number") {
       shorthand = [shorthand];
     } else {
       // Array
@@ -110,8 +110,6 @@ function getSpacingType(type, sides) {
 }
 
 function getFlexbox({ dial = 0, flex, space, stretch, reverse }, dir) {
-  dial = parseInt(dial, 10);
-
   if (isNaN(dial) || dial < 0 || dial > 10) {
     throw new TypeError("`dial` parameter must be between 1 and 9");
   }
