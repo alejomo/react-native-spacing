@@ -23,26 +23,29 @@ export function getColStyle(props) {
 
 function getStyle(props, dir) {
   return Object.assign(
-    getSpacing(props),
-    getFlexbox(props, dir),
-    getUtils(props)
+    getMarginStyle(props),
+    getPaddingStyle(props),
+    getFlexboxStyle(props, dir),
+    getUtilsStyle(props)
   );
 }
 
-function getUtils({ color }) {
+function getUtilsStyle({ color }) {
   return {
     backgroundColor: color
   };
 }
 
-function getSpacing(props) {
+export function getMarginStyle(props) {
   const margin = filterSides(props, marginPropNames);
+
+  return getSpacingType("margin", margin);
+}
+
+export function getPaddingStyle(props) {
   const padding = filterSides(props, paddingPropNames);
 
-  return Object.assign(
-    getSpacingType("margin", margin),
-    getSpacingType("padding", padding)
-  );
+  return getSpacingType("padding", padding);
 }
 
 function getSpacingType(type, sides) {
@@ -109,7 +112,7 @@ function getSpacingType(type, sides) {
   return style;
 }
 
-function getFlexbox({ dial = 0, flex, space, stretch, reverse }, dir) {
+function getFlexboxStyle({ dial = 0, flex, space, stretch, reverse }, dir) {
   if (isNaN(dial) || dial < 0 || dial > 10) {
     throw new TypeError("`dial` parameter must be between 1 and 9");
   }

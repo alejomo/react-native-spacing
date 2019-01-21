@@ -9,8 +9,8 @@ const sides = ["", "t", "r", "b", "l", "v", "h"];
 
 export const marginPropNames = sides.map(side => `m${side}`);
 export const paddingPropNames = sides.map(side => `p${side}`);
-
-export const spacingPropNames = marginPropNames
+marginPropNames
+export const spacingPropNames =
   .concat(paddingPropNames)
   .concat(["dial", "flex", "space", "stretch", "reverse", "color"]);
 

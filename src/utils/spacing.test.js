@@ -5,7 +5,7 @@ test("margin", () => {
 });
 
 test("padding", () => {
-  expect(getRowStyle({ p: "3" })).toHaveProperty("padding", 16);
+  expect(getRowStyle({ p: 3 })).toHaveProperty("padding", 16);
 });
 
 test("top", () => {
@@ -13,7 +13,7 @@ test("top", () => {
 });
 
 test("right", () => {
-  expect(getRowStyle({ mr: "2" })).toHaveProperty("marginRight", 8);
+  expect(getRowStyle({ mr: 2 })).toHaveProperty("marginRight", 8);
 });
 
 test("bottom", () => {
@@ -21,7 +21,7 @@ test("bottom", () => {
 });
 
 test("left", () => {
-  expect(getRowStyle({ ml: "2" })).toHaveProperty("marginLeft", 8);
+  expect(getRowStyle({ ml: 2 })).toHaveProperty("marginLeft", 8);
 });
 
 test("vertical", () => {
@@ -29,7 +29,7 @@ test("vertical", () => {
 });
 
 test("horizontal", () => {
-  expect(getRowStyle({ mh: "2" })).toHaveProperty("marginHorizontal", 8);
+  expect(getRowStyle({ mh: 2 })).toHaveProperty("marginHorizontal", 8);
 });
 
 test("shorthand (1)", () => {
@@ -37,14 +37,14 @@ test("shorthand (1)", () => {
 });
 
 test("shorthand (2)", () => {
-  const result = getRowStyle({ m: "4 1" });
+  const result = getRowStyle({ m: [4, 1] });
 
   expect(result).toHaveProperty("marginVertical", 32);
   expect(result).toHaveProperty("marginHorizontal", 4);
 });
 
 test("shorthand (3)", () => {
-  const result = getRowStyle({ m: "4 2 1" });
+  const result = getRowStyle({ m: [4, 2, 1] });
 
   expect(result).toHaveProperty("marginTop", 32);
   expect(result).toHaveProperty("marginHorizontal", 8);
@@ -52,7 +52,7 @@ test("shorthand (3)", () => {
 });
 
 test("shorthand (4)", () => {
-  const result = getRowStyle({ m: "4 2 1 1" });
+  const result = getRowStyle({ m: [4, 2, 1, 1] });
 
   expect(result).toHaveProperty("marginTop", 32);
   expect(result).toHaveProperty("marginRight", 8);
