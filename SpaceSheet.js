@@ -44,7 +44,7 @@ export default class SpaceSheet extends Sheet {
     const style = {};
 
     Object.keys(props).forEach(name => {
-      const size = props[name];
+      const value = props[name];
       let prop;
 
       if (this.isAlias.test(name)) {
@@ -54,10 +54,13 @@ export default class SpaceSheet extends Sheet {
         prop = `${spacing}${side}`;
       } else if (isStandard.test(name)) {
         prop = name;
+      } else {
+        // Pass prop...
+        style[name] = value;
       }
 
       if (prop) {
-        style[prop] = this.sizes.length ? this.sizes[size] : size;
+        style[prop] = this.sizes.length ? this.sizes[value] : value;
       }
     });
 
