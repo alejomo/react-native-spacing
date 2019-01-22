@@ -109,7 +109,6 @@ function shorthand(arr, spacing) {
       throw new Error(
         `Wrong react-native-spacing shorthand: [${arr.join(', ')}]`
       );
-      break;
   }
 
   return _mapKeys(sides, (value, side) => `${spacing}${side}`);
