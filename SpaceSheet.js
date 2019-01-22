@@ -7,6 +7,7 @@ export default class SpaceSheet {
 
   sizes = [];
   strategy = {};
+  isSpace = null;
 
   constructor(strategy = defaultStrategy) {
     this.strategy = strategy;
@@ -63,7 +64,7 @@ export default class SpaceSheet {
     return this.constructor.create(this.getStyle(props));
   }
 
-  static partition({ ...view }) {
+  partition({ ...view }) {
     const props = {};
 
     Object.keys(view).forEach(name => {
