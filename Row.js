@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import { getStyleSheet, partition } from './dial';
+//
+import DialSheet from './DialSheet';
 
 export default function Row(props) {
-  const [view, dial] = partition(props);
-  const style = getStyleSheet(dial, 'row');
+  const [view, dial] = DialSheet.partition(props);
+  const style = DialSheet.getStyleSheet(dial, 'row');
 
   return <View {...view} style={[style, view.style]} />;
 }

@@ -1,17 +1,15 @@
-import { StyleSheet } from 'react-native';
-//
+import Sheet from './Sheet';
+import DialSheet from './DialSheet';
 import defaultStrategy from './strategy';
 
-const flexProps = ['dial', 'flex', 'space', 'stretch', 'reverse', 'color'];
-
-export default class SpaceSheet {
-  static cache = {};
-
+export default class SpaceSheet extends Sheet {
   sizes = [];
   strategy = {};
   isSpace = null;
 
   constructor(strategy = defaultStrategy) {
+    super();
+
     this.strategy = strategy;
 
     const spacings = Object.keys(strategy.spacings).join('|');
@@ -34,7 +32,7 @@ export default class SpaceSheet {
     this.sizes = sizes;
   }
 
-  getStyle({ ...props }) {
+  getStyle({ ...props }, dir) {
     // Normalize input
     if (Array.isArray(props.m)) {
       Object.assign(props, this.strategy.shorthand(props.m, 'm'));
@@ -59,18 +57,18 @@ export default class SpaceSheet {
           : size;
       });
 
-    return style;
+    return Object.assign(style, DialSheet.getStyle(props, dir));
   }
 
-  getStyleSheet(props) {
-    return this.constructor.create(this.getStyle(props));
+  getStyleSheet(props, dir) {
+    return this.constructor.create(this.getStyle(props, dir));
   }
 
   partition({ ...view }) {
     const props = {};
 
     Object.keys(view).forEach(name => {
-      if (this.isSpace.test(name)) {
+      if (this.isSpace.test(name) || DialSheet.isDial) {
         props[name] = view[name];
 
         delete view[name];
@@ -78,22 +76,5 @@ export default class SpaceSheet {
     });
 
     return [view, props];
-  }
-
-  static create(style) {
-    const key = this.getCacheKey(style);
-
-    if (typeof this.cache[key] === 'undefined') {
-      Object.assign(this.cache, StyleSheet.create({ [key]: style }));
-    }
-
-    return this.cache[key];
-  }
-
-  static getCacheKey(style) {
-    return Object.keys(style)
-      .map(key => `${key}:${style[key]}`)
-      .sort()
-      .join(',');
   }
 }
