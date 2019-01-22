@@ -22,9 +22,9 @@ export function getStyleSheet(props, dir) {
   return SpaceSheet.create(getStyle(props, dir));
 }
 
-function getFlexboxStyle({ dial = 0, flex, space, stretch, reverse }, dir) {
-  if (isNaN(dial) || dial < 1 || dial > 9) {
-    throw new TypeError("`dial` parameter must be between 1 and 9");
+function getFlexboxStyle({ dial, flex, space, stretch, reverse }, dir) {
+  if (dial && (dial < 1 || dial > 9)) {
+    throw new TypeError("`dial` prop must be between 1 and 9");
   }
 
   // Main-axis
@@ -32,7 +32,7 @@ function getFlexboxStyle({ dial = 0, flex, space, stretch, reverse }, dir) {
 
   if (space) {
     justifyContent = `space-${space}`;
-  } else if (dial > 0) {
+  } else if (dial) {
     justifyContent = dir === "row" ? dialX(dial) : dialY(dial);
   } else {
     // undefined
@@ -43,7 +43,7 @@ function getFlexboxStyle({ dial = 0, flex, space, stretch, reverse }, dir) {
 
   if (stretch) {
     alignItems = "stretch";
-  } else if (dial > 0) {
+  } else if (dial) {
     alignItems = dir === "row" ? dialY(dial) : dialX(dial);
   } else {
     // undefined

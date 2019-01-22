@@ -79,16 +79,16 @@ export default class SpaceSheet {
   }
 
   static create(style) {
-    const key = this.constructor.getCacheKey(style);
+    const key = this.getCacheKey(style);
 
-    if (typeof this.constructor.cache[key] === "undefined") {
+    if (typeof this.cache[key] === "undefined") {
       Object.assign(
-        this.constructor.cache,
+        this.cache,
         StyleSheet.create({ [key]: style })
       );
     }
 
-    return this.constructor.cache[key];
+    return this.cache[key];
   }
 
   static getCacheKey(style) {
