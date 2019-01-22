@@ -1,6 +1,6 @@
-import SpaceSheet from "./SpaceSheet";
+import SpaceSheet from './SpaceSheet';
 
-const propNames = ["dial", "flex", "space", "stretch", "reverse", "color"];
+const propNames = ['dial', 'flex', 'space', 'stretch', 'reverse', 'color'];
 
 export function partition({ ...view }) {
   const props = {};
@@ -24,7 +24,7 @@ export function getStyleSheet(props, dir) {
 
 function getFlexboxStyle({ dial, flex, space, stretch, reverse }, dir) {
   if (dial && (dial < 1 || dial > 9)) {
-    throw new TypeError("`dial` prop must be between 1 and 9");
+    throw new TypeError('`dial` prop must be between 1 and 9');
   }
 
   // Main-axis
@@ -33,7 +33,7 @@ function getFlexboxStyle({ dial, flex, space, stretch, reverse }, dir) {
   if (space) {
     justifyContent = `space-${space}`;
   } else if (dial) {
-    justifyContent = dir === "row" ? dialX(dial) : dialY(dial);
+    justifyContent = dir === 'row' ? dialX(dial) : dialY(dial);
   } else {
     // undefined
   }
@@ -42,9 +42,9 @@ function getFlexboxStyle({ dial, flex, space, stretch, reverse }, dir) {
   let alignItems;
 
   if (stretch) {
-    alignItems = "stretch";
+    alignItems = 'stretch';
   } else if (dial) {
-    alignItems = dir === "row" ? dialY(dial) : dialX(dial);
+    alignItems = dir === 'row' ? dialY(dial) : dialX(dial);
   } else {
     // undefined
   }
@@ -53,28 +53,28 @@ function getFlexboxStyle({ dial, flex, space, stretch, reverse }, dir) {
     flex: flex === true ? 1 : flex,
     justifyContent,
     alignItems,
-    flexDirection: reverse ? `${dir}-reverse` : dir
+    flexDirection: reverse ? `${dir}-reverse` : dir,
   };
 }
 
 function getUtilsStyle({ color }) {
   return {
-    backgroundColor: color
+    backgroundColor: color,
   };
 }
 
 function dialX(dial) {
-  if (dial % 3 === 0) return "flex-end";
+  if (dial % 3 === 0) return 'flex-end';
 
-  if (dial % 3 === 2) return "center";
+  if (dial % 3 === 2) return 'center';
 
-  return "flex-start";
+  return 'flex-start';
 }
 
 function dialY(dial) {
-  if (dial > 6) return "flex-end";
+  if (dial > 6) return 'flex-end';
 
-  if (dial > 3) return "center";
+  if (dial > 3) return 'center';
 
-  return "flex-start";
+  return 'flex-start';
 }

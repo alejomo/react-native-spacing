@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 //
-import defaultStrategy from "./strategy";
+import defaultStrategy from './strategy';
+
+const flexProps = ['dial', 'flex', 'space', 'stretch', 'reverse', 'color'];
 
 export default class SpaceSheet {
   static cache = {};
@@ -12,8 +14,8 @@ export default class SpaceSheet {
   constructor(strategy = defaultStrategy) {
     this.strategy = strategy;
 
-    const spacings = Object.keys(strategy.spacings).join("|");
-    const sides = Object.keys(strategy.sides).join("|");
+    const spacings = Object.keys(strategy.spacings).join('|');
+    const sides = Object.keys(strategy.sides).join('|');
 
     this.isSpace = new RegExp(`^(${spacings})(${sides})?$`);
   }
@@ -35,11 +37,11 @@ export default class SpaceSheet {
   getStyle({ ...props }) {
     // Normalize input
     if (Array.isArray(props.m)) {
-      Object.assign(props, this.strategy.shorthand(props.m, "m"));
+      Object.assign(props, this.strategy.shorthand(props.m, 'm'));
     }
 
     if (Array.isArray(props.p)) {
-      Object.assign(props, this.strategy.shorthand(props.p, "p"));
+      Object.assign(props, this.strategy.shorthand(props.p, 'p'));
     }
 
     // Generate style
@@ -81,11 +83,8 @@ export default class SpaceSheet {
   static create(style) {
     const key = this.getCacheKey(style);
 
-    if (typeof this.cache[key] === "undefined") {
-      Object.assign(
-        this.cache,
-        StyleSheet.create({ [key]: style })
-      );
+    if (typeof this.cache[key] === 'undefined') {
+      Object.assign(this.cache, StyleSheet.create({ [key]: style }));
     }
 
     return this.cache[key];
@@ -95,6 +94,6 @@ export default class SpaceSheet {
     return Object.keys(style)
       .map(key => `${key}:${style[key]}`)
       .sort()
-      .join(",");
+      .join(',');
   }
 }

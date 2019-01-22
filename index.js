@@ -1,6 +1,6 @@
-import React from "react";
-import SCol from "./Col";
-import SRow from "./Row";
+import React from 'react';
+import SCol from './Col';
+import SRow from './Row';
 
 const spaceSheet = new SpaceSheet();
 
