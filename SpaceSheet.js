@@ -1,19 +1,16 @@
+import _mapKeys from 'lodash.mapkeys';
+import _get from 'lodash.get';
+//
 import Sheet from './Sheet';
 import defaultStrategy from './strategy';
 
 export default class SpaceSheet extends Sheet {
   sizes = [];
   strategy = {};
-  isAlias = null;
 
   constructor(strategy = defaultStrategy) {
     super();
     this.strategy = strategy;
-
-    // Init
-    const { spacings, sides } = strategy;
-
-    this.isAlias = createTest(Object.keys(spacings), Object.keys(sides));
   }
 
   setSpacing(spacing, range = 5) {
@@ -32,37 +29,24 @@ export default class SpaceSheet extends Sheet {
 
   getStyle({ ...props }) {
     // Normalize input
-    const margin = props.m || props.margin;
-    if (Array.isArray(margin)) {
-      Object.assign(props, this.strategy.shorthand(margin, 'm'));
+    if (Array.isArray(props.margin)) {
+      Object.assign(props, shorthand(props.margin, 'margin'));
     }
 
-    const padding = props.p || props.padding;
-    if (Array.isArray(padding)) {
-      Object.assign(props, this.strategy.shorthand(padding, 'p'));
+    if (Array.isArray(props.padding)) {
+      Object.assign(props, shorthand(props.padding, 'padding'));
     }
 
     // Generate style
     const style = {};
 
     Object.keys(props).forEach(name => {
-      const value = props[name];
-      let prop;
+      const val = props[name];
 
-      if (this.isAlias.test(name)) {
-        const spacing = this.strategy.getSpacing(name);
-        const side = this.strategy.getSide(name);
-
-        prop = `${spacing}${side}`;
-      } else if (isStandard.test(name)) {
-        prop = name;
+      if (isSpace.test(name)) {
+        style[name] = _get(this.sizes, val, val);
       } else {
-        // Pass prop...
-        style[name] = value;
-      }
-
-      if (prop) {
-        style[prop] = this.sizes.length ? this.sizes[value] : value;
+        style[name] = val;
       }
     });
 
@@ -77,8 +61,10 @@ export default class SpaceSheet extends Sheet {
     const props = {};
 
     Object.keys(view).forEach(name => {
-      if (this.isAlias.test(name)) {
-        props[name] = view[name];
+      const unalias = this.strategy.aliases[name];
+
+      if (unalias) {
+        props[unalias] = view[name];
 
         delete view[name];
       }
@@ -88,9 +74,43 @@ export default class SpaceSheet extends Sheet {
   }
 }
 
-const { spacings, sides } = defaultStrategy;
-const isStandard = createTest(Object.values(spacings), Object.values(sides));
+const spaceNames = Object.values(defaultStrategy.aliases);
+const isSpace = new RegExp(`^(${spaceNames.join('|')})$`);
 
-function createTest(spacings, sides) {
-  return new RegExp(`^(${spacings.join('|')})(${sides.join('|')})?$`);
+function shorthand(arr, spacing) {
+  let sides;
+
+  switch (arr.length) {
+    case 2:
+      sides = {
+        Vertical: arr[0],
+        Horizontal: arr[1],
+      };
+      break;
+
+    case 3:
+      sides = {
+        Top: arr[0],
+        Horizontal: arr[1],
+        Bottom: arr[2],
+      };
+      break;
+
+    case 4:
+      sides = {
+        Top: arr[0],
+        Right: arr[1],
+        Bottom: arr[2],
+        Left: arr[3],
+      };
+      break;
+
+    default:
+      throw new Error(
+        `Wrong react-native-spacing shorthand: [${arr.join(', ')}]`
+      );
+      break;
+  }
+
+  return _mapKeys(sides, (value, side) => `${spacing}${side}`);
 }
