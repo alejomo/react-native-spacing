@@ -1,3 +1,4 @@
+import React from "react";
 import SCol from "./Col";
 import SRow from "./Row";
 

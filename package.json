@@ -1,6 +1,6 @@
 {
   "name": "react-native-spacing",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A wrapper around the react-native View component enabling concise assignment of flexbox properties + \"À la Bootstrap\" spacing properties",
   "main": "index.js",
   "scripts": {
