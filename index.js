@@ -1,6 +1,21 @@
-import Col from "./src/Col";
-import Row from "./src/Row";
+import SCol from "./Col";
+import SRow from "./Row";
+import SpaceSheet from "./SpaceSheet";
 
-export { Col, Row };
+const spaceSheet = new SpaceSheet();
 
-export default Col; // View
+export function Row(props) {
+  const [view, spaces] = SpaceSheet.partition(props);
+
+  return (
+    <SRow {...view} style={[spaceSheet.getStyleSheet(spaces), view.style]} />
+  );
+}
+
+export default function Col(props) {
+  const [view, spaces] = SpaceSheet.partition(props);
+
+  return (
+    <SCol {...view} style={[spaceSheet.getStyleSheet(spaces), view.style]} />
+  );
+}
