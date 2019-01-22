@@ -1,5 +1,4 @@
 import Sheet from './Sheet';
-import DialSheet from './DialSheet';
 import defaultStrategy from './strategy';
 
 export default class SpaceSheet extends Sheet {
@@ -32,7 +31,7 @@ export default class SpaceSheet extends Sheet {
     this.sizes = sizes;
   }
 
-  getStyle({ ...props }, dir) {
+  getStyle({ ...props }) {
     // Normalize input
     if (Array.isArray(props.m)) {
       Object.assign(props, this.strategy.shorthand(props.m, 'm'));
@@ -57,18 +56,18 @@ export default class SpaceSheet extends Sheet {
           : size;
       });
 
-    return Object.assign(style, DialSheet.getStyle(props, dir));
+    return style;
   }
 
-  getStyleSheet(props, dir) {
-    return this.constructor.create(this.getStyle(props, dir));
+  getStyleSheet(props) {
+    return this.constructor.create(this.getStyle(props));
   }
 
   partition({ ...view }) {
     const props = {};
 
     Object.keys(view).forEach(name => {
-      if (this.isSpace.test(name) || DialSheet.isDial) {
+      if (this.isSpace.test(name)) {
         props[name] = view[name];
 
         delete view[name];

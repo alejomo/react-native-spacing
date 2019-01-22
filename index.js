@@ -1,18 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+//
+import SCol from './Col';
+import SRow from './Row';
 
 const spaceSheet = new SpaceSheet();
 
 export function Row(props) {
-  const [view, spaces] = spaceSheet.partition(props);
-  const style = spaceSheet.getStyleSheet(spaces, 'row');
+  const [rest, spaces] = spaceSheet.partition(props);
+  const style = spaceSheet.getStyleSheet(spaces);
 
-  return <View {...view} style={[style, view.style]} />;
+  return <SRow {...rest} style={[style, rest.style]} />;
 }
 
 export default function Col(props) {
-  const [view, spaces] = spaceSheet.partition(props);
-  const style = spaceSheet.getStyleSheet(spaces, 'column');
+  const [rest, spaces] = spaceSheet.partition(props);
+  const style = spaceSheet.getStyleSheet(spaces);
 
-  return <View {...view} style={[style, view.style]} />;
+  return <SCol {...rest} style={[style, rest.style]} />;
 }
