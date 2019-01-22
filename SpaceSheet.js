@@ -72,7 +72,7 @@ export default class SpaceSheet extends Sheet {
     const props = {};
 
     Object.keys(view).forEach(name => {
-      if (this.isAlias.test(name) || isStandard.test(name)) {
+      if (this.isAlias.test(name)) {
         props[name] = view[name];
 
         delete view[name];
