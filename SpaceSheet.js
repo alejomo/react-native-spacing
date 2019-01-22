@@ -32,12 +32,14 @@ export default class SpaceSheet extends Sheet {
 
   getStyle({ ...props }) {
     // Normalize input
-    if (Array.isArray(props.m)) {
-      Object.assign(props, this.strategy.shorthand(props.m, 'm'));
+    const margin = props.m || props.margin;
+    if (Array.isArray(margin)) {
+      Object.assign(props, this.strategy.shorthand(margin, 'm'));
     }
 
-    if (Array.isArray(props.p)) {
-      Object.assign(props, this.strategy.shorthand(props.p, 'p'));
+    const padding = props.p || props.padding;
+    if (Array.isArray(padding)) {
+      Object.assign(props, this.strategy.shorthand(padding, 'p'));
     }
 
     // Generate style
