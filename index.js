@@ -2,6 +2,7 @@ import React from 'react';
 //
 import SCol from './Col';
 import SRow from './Row';
+import SpaceSheet from './SpaceSheet';
 
 const spaceSheet = new SpaceSheet();
 
